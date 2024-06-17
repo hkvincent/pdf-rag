@@ -14,10 +14,12 @@ services:
       - SQLALCHEMY_DATABASE_URI=sqlite:///sqlite.db
       - OPENAI_API_KEY=sk-
       - REDIS_URI=redis://redis:6379
-      - PINECONE_API_KEY=c
+      - PINECONE_API_KEY=cf2
       - PINECONE_ENV_NAME=us-east-1
       - PINECONE_INDEX_NAME=pdf-rag
       - UPLOAD_URL=http://local-do-files:8050
+      - LANGFUSE_PUBLIC_KEY=SECRET_KEY
+      - LANGFUSE_SECRET_KEY=cf
     command: inv dev
     depends_on:
       - redis
