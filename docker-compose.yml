@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - FLASK_APP=app.web
+      - FLASK_ENV=development
+      - SECRET_KEY=123
+      - SQLALCHEMY_DATABASE_URI=sqlite:///sqlite.db
+      - OPENAI_API_KEY=
+      - REDIS_URI=redis://redis:6379
+      - PINECONE_API_KEY=****
+      - PINECONE_ENV_NAME=us-east-1
+      - PINECONE_INDEX_NAME=pdf-rag
+    depends_on:
+      - redis
+
+  worker:
+    build: .
+    command: celery -A app.celery worker --loglevel=info
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - FLASK_APP=app.web
+      - FLASK_ENV=development
+      - SECRET_KEY=123
+      - SQLALCHEMY_DATABASE_URI=sqlite:///sqlite.db
+      - OPENAI_API_KEY=
+      - REDIS_URI=redis://redis:6379
+    depends_on:
+      - app
+      - redis
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  init-db:
+    build: .
+    command: flask --app app.web init-db
+    environment:
+      - FLASK_APP=app.web
+    depends_on:
+      - redis
