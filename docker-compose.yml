@@ -14,45 +14,47 @@ services:
       - SQLALCHEMY_DATABASE_URI=sqlite:///sqlite.db
       - OPENAI_API_KEY=sk-
       - REDIS_URI=redis://redis:6379
-      - PINECONE_API_KEY=*
+      - PINECONE_API_KEY=c
       - PINECONE_ENV_NAME=us-east-1
       - PINECONE_INDEX_NAME=pdf-rag
       - UPLOAD_URL=http://local-do-files:8050
+    command: inv dev
     depends_on:
       - redis
+      - local-do-files
 
   worker:
     build: .
-    command: celery -A app.celery worker --loglevel=info
+    command: celery -A app.celery.celery worker --loglevel=info
     volumes:
       - .:/usr/src/app
     environment:
+      - REDIS_URI=redis://redis:6379
+      - SECRET_KEY=123  # Ensure SECRET_KEY is defined for the worker as well
       - FLASK_APP=app.web
       - FLASK_ENV=development
-      - SECRET_KEY=123
-      - SQLALCHEMY_DATABASE_URI=sqlite:///sqlite.db
-      - OPENAI_API_KEY=
-      - REDIS_URI=redis://redis:6379
     depends_on:
       - app
       - redis
 
+
   local-do-files:
     build:
       context: .
-      dockerfile: Dockerfile-upload  # Use the new Dockerfile for this service
+      dockerfile: Dockerfile-upload
     ports:
       - "8050:8050"
+    command: python app.py
 
   redis:
     image: redis:latest
     ports:
       - "6379:6379"
 
-  init-db:
-    build: .
-    command: flask --app app.web init-db
-    environment:
-      - FLASK_APP=app.web
-    depends_on:
-      - redis
+  # init-db:
+  #   build: .
+  #   command: flask --app app.web init-db
+  #   environment:
+  #     - FLASK_APP=app.web
+  #   depends_on:
+  #     - redis

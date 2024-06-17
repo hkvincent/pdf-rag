@@ -12,7 +12,7 @@ COPY client/ /app/
 RUN npm install && npm run build
 
 # Stage 2: Setup the Flask application
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 # Set the working directory in the container for Flask
 WORKDIR /usr/src/app
