@@ -20,7 +20,7 @@ services:
     volumes:
       - .:/usr/src/app
     environment:
-     
+   
     depends_on:
       - app
       - redis

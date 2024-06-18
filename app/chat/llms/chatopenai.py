@@ -6,5 +6,5 @@ def build_llm(chat_args, model_name):
     return ChatOpenAI(
         streaming=chat_args.streaming,
         model_name=model_name,
-        baseopenai_api_base_url=os.getenv("OPENAI_API_BASE"),
+        openai_api_base=os.getenv("OPENAI_API_BASE_URL"),
     )
