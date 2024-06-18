@@ -7,6 +7,7 @@ services:
       - "80:8000"
     volumes:
       - .:/usr/src/app
+      - /opt/instance:/usr/src/app/instance
     environment:
       - FLASK_APP=app.web
       - FLASK_ENV=development
@@ -31,6 +32,7 @@ services:
     command: inv devworker
     volumes:
       - .:/usr/src/app
+      - /opt/instance:/usr/src/app/instance
     environment:
       - FLASK_APP=app.web
       - FLASK_ENV=development
@@ -63,10 +65,27 @@ services:
     ports:
       - "6379:6379"
 
-  # init-db:
-  #   build: .
-  #   command: flask --app app.web init-db
-  #   environment:
-  #     - FLASK_APP=app.web
-  #   depends_on:
-  #     - redis
+  init-db:
+    build: .
+    command: flask --app app.web init-db
+    environment:
+      - FLASK_APP=app.web
+      - FLASK_ENV=development
+      - SECRET_KEY=123
+      - SQLALCHEMY_DATABASE_URI=sqlite:///sqlite.db
+      - OPENAI_API_KEY=
+      - REDIS_URI=redis://redis:6379
+      - PINECONE_API_KEY=
+      - PINECONE_ENV_NAME=us-east-1
+      - PINECONE_INDEX_NAME=pdf-rag
+      - UPLOAD_URL=http://local-do-files:8050
+      - LANGFUSE_PUBLIC_KEY=
+      - LANGFUSE_SECRET_KEY=
+      - OPENAI_API_BASE_URL=
+    depends_on:
+      - redis
+    profiles:
+      - db-init
+    volumes:
+      - .:/usr/src/app
+      - /opt/instance:/usr/src/app/instance

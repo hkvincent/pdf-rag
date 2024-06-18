@@ -15,8 +15,14 @@ This section describes how to use Docker Compose to set up and run the applicati
 1. **Build and Run the Application**:
     Use Docker Compose to build and start all services defined in the `docker-compose.yml` file:
 
+    first run to initialize the database
     ```bash
-    docker-compose up --build
+    docker-compose --profile db-init up -d
+    ```
+
+    second run after the db init
+    ```bash
+    docker-compose up --build -d
     ```
 
     This command builds the images if they do not exist and starts the containers. It runs the database initialization command and then starts the Flask application.
