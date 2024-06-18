@@ -20,7 +20,7 @@ services:
       - UPLOAD_URL=http://local-do-files:8050
       - LANGFUSE_PUBLIC_KEY=SECRET_KEY
       - LANGFUSE_SECRET_KEY=cf
-    command: inv dev
+    command: /bin/bash -c "flask --app app.web init-db && inv dev"
     depends_on:
       - redis
       - local-do-files
