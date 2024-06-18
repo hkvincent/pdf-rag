@@ -161,7 +161,6 @@ Then:
 flask --app app.web init-db
 ```
 
-To integrate Docker Compose into your existing README and address the requirement to run multiple commands (`inv dev` and `flask --app app.web init-db`), you should update the documentation to clearly guide users on how to use Docker Compose for setting up and running your application. Here's how you can add the Docker Compose setup to your README, with sensitive data removed and clear instructions for using Docker:
 
 ### Updated README Section for Docker Compose Usage
 
