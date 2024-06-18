@@ -4,23 +4,11 @@ services:
   app:
     build: .
     ports:
-      - "5000:5000"
+      - "80:8000"
     volumes:
       - .:/usr/src/app
     environment:
-      - FLASK_APP=app.web
-      - FLASK_ENV=development
-      - SECRET_KEY=123
-      - SQLALCHEMY_DATABASE_URI=sqlite:///sqlite.db
-      - OPENAI_API_KEY=sk-qnq2NrYkl7W3MhAqCa72F5Da2b5f4a5296D08f5607B30b90
-      - REDIS_URI=redis://redis:6379
-      - PINECONE_API_KEY=cf2bcbc1-95d1-47ce-adad-741f6528fb1b
-      - PINECONE_ENV_NAME=us-east-1
-      - PINECONE_INDEX_NAME=pdf-rag
-      - UPLOAD_URL=http://local-do-files:8050
-      - LANGFUSE_PUBLIC_KEY=pk-lf-943320e0-2d7b-4db6-8a47-1f28d6624c17
-      - LANGFUSE_SECRET_KEY=sk-lf-d67a2fb0-db0d-4d7e-b247-636a45ac3548
-      - OPENAI_API_BASE_URL=https://burn.hair/v1
+
     command: /bin/bash -c "flask --app app.web init-db && inv dev"
     depends_on:
       - redis
@@ -32,19 +20,7 @@ services:
     volumes:
       - .:/usr/src/app
     environment:
-      - FLASK_APP=app.web
-      - FLASK_ENV=development
-      - SECRET_KEY=123
-      - SQLALCHEMY_DATABASE_URI=sqlite:///sqlite.db
-      - OPENAI_API_KEY=sk-qnq2NrYkl7W3MhAqCa72F5Da2b5f4a5296D08f5607B30b90
-      - REDIS_URI=redis://redis:6379
-      - PINECONE_API_KEY=cf2bcbc1-95d1-47ce-adad-741f6528fb1b
-      - PINECONE_ENV_NAME=us-east-1
-      - PINECONE_INDEX_NAME=pdf-rag
-      - UPLOAD_URL=http://local-do-files:8050
-      - LANGFUSE_PUBLIC_KEY=pk-lf-943320e0-2d7b-4db6-8a47-1f28d6624c17
-      - LANGFUSE_SECRET_KEY=sk-lf-d67a2fb0-db0d-4d7e-b247-636a45ac3548
-      - OPENAI_API_BASE_URL=https://burn.hair/v1
+     
     depends_on:
       - app
       - redis
