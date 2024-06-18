@@ -8,18 +8,7 @@ services:
     volumes:
       - .:/usr/src/app
     environment:
-      - FLASK_APP=app.web
-      - FLASK_ENV=development
-      - SECRET_KEY=123
-      - SQLALCHEMY_DATABASE_URI=sqlite:///sqlite.db
-      - OPENAI_API_KEY=sk-
-      - REDIS_URI=redis://redis:6379
-      - PINECONE_API_KEY=cf2
-      - PINECONE_ENV_NAME=us-east-1
-      - PINECONE_INDEX_NAME=pdf-rag
-      - UPLOAD_URL=http://local-do-files:8050
-      - LANGFUSE_PUBLIC_KEY=SECRET_KEY
-      - LANGFUSE_SECRET_KEY=cf
+
     command: /bin/bash -c "flask --app app.web init-db && inv dev"
     depends_on:
       - redis
@@ -31,18 +20,7 @@ services:
     volumes:
       - .:/usr/src/app
     environment:
-      - FLASK_APP=app.web
-      - FLASK_ENV=development
-      - SECRET_KEY=123
-      - SQLALCHEMY_DATABASE_URI=sqlite:///sqlite.db
-      - OPENAI_API_KEY=sk-
-      - REDIS_URI=redis://redis:6379
-      - PINECONE_API_KEY=cf2
-      - PINECONE_ENV_NAME=us-east-1
-      - PINECONE_INDEX_NAME=pdf-rag
-      - UPLOAD_URL=http://local-do-files:8050
-      - LANGFUSE_PUBLIC_KEY=SECRET_KEY
-      - LANGFUSE_SECRET_KEY=cf
+     
     depends_on:
       - app
       - redis
