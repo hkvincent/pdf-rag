@@ -162,9 +162,7 @@ flask --app app.web init-db
 ```
 
 
-### Updated README Section for Docker Compose Usage
 
----
 
 # Docker Setup
 
