@@ -32,7 +32,7 @@ ENV FLASK_APP=app.web
 ENV FLASK_ENV=development
 
 # Expose the port the app runs on
-EXPOSE 5000
+EXPOSE 8000
 
 # Command to run the app
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=8000"]
