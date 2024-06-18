@@ -31,10 +31,18 @@ services:
     volumes:
       - .:/usr/src/app
     environment:
-      - REDIS_URI=redis://redis:6379
-      - SECRET_KEY=123  # Ensure SECRET_KEY is defined for the worker as well
       - FLASK_APP=app.web
       - FLASK_ENV=development
+      - SECRET_KEY=123
+      - SQLALCHEMY_DATABASE_URI=sqlite:///sqlite.db
+      - OPENAI_API_KEY=sk-
+      - REDIS_URI=redis://redis:6379
+      - PINECONE_API_KEY=cf2
+      - PINECONE_ENV_NAME=us-east-1
+      - PINECONE_INDEX_NAME=pdf-rag
+      - UPLOAD_URL=http://local-do-files:8050
+      - LANGFUSE_PUBLIC_KEY=SECRET_KEY
+      - LANGFUSE_SECRET_KEY=cf
     depends_on:
       - app
       - redis
