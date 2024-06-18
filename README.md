@@ -164,7 +164,7 @@ flask --app app.web init-db
 
 
 
-# Docker Setup
+# Docker Setup [Recommend]
 
 This section describes how to use Docker Compose to set up and run the application. This method is recommended for development environments where Docker is preferred for managing application components.
 
@@ -224,20 +224,20 @@ You may want to run individual services manually for debugging or development pu
 
 Ensure that all necessary environment variables are set up correctly in your `docker-compose.yml`. For sensitive data, consider using Docker secrets or external environment files (`.env`).
 
----here is the environment variables in the docker-compose file
-    "FLASK_APP",
-    "FLASK_ENV",
-    "SECRET_KEY",
-    "SQLALCHEMY_DATABASE_URI",
-    "OPENAI_API_KEY",
-    "REDIS_URI",
-    "PINECONE_API_KEY",
-    "PINECONE_ENV_NAME",
-    "PINECONE_INDEX_NAME",
-    "UPLOAD_URL",
-    "LANGFUSE_PUBLIC_KEY",
-    "LANGFUSE_SECRET_KEY",
-    "OPENAI_API_BASE_URL"
+- here is the environment variables in the docker-compose file
+    - "FLASK_APP",
+    - "FLASK_ENV",
+    - "SECRET_KEY",
+    - "SQLALCHEMY_DATABASE_URI",
+    - "OPENAI_API_KEY",
+    - "REDIS_URI",
+    - "PINECONE_API_KEY",
+    - "PINECONE_ENV_NAME",
+    - "PINECONE_INDEX_NAME",
+    - "UPLOAD_URL",
+    - "LANGFUSE_PUBLIC_KEY",
+    - "LANGFUSE_SECRET_KEY",
+    - "OPENAI_API_BASE_URL"
 
 
 
