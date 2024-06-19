@@ -9,20 +9,21 @@ services:
       - .:/usr/src/app
       - /opt/instance:/usr/src/app/instance
     environment:
-      - FLASK_APP=app.web
-      - FLASK_ENV=development
-      - SECRET_KEY=123
-      - SQLALCHEMY_DATABASE_URI=sqlite:///sqlite.db
-      - OPENAI_API_KEY=
-      - REDIS_URI=redis://redis:6379
-      - PINECONE_API_KEY=
-      - PINECONE_ENV_NAME=us-east-1
-      - PINECONE_INDEX_NAME=pdf-rag
-      - UPLOAD_URL=http://local-do-files:8050
-      - LANGFUSE_PUBLIC_KEY=
-      - LANGFUSE_SECRET_KEY=
-      - OPENAI_API_BASE_URL=
-    command: /bin/bash -c "flask --app app.web init-db && inv dev"
+      - FLASK_APP
+      - FLASK_ENV
+      - SECRET_KEY
+      - SQLALCHEMY_DATABASE_URI
+      - OPENAI_API_KEY
+      - REDIS_URI
+      - PINECONE_API_KEY
+      - PINECONE_ENV_NAME
+      - PINECONE_INDEX_NAME
+      - UPLOAD_URL
+      - LANGFUSE_PUBLIC_KEY
+      - LANGFUSE_SECRET_KEY
+      - OPENAI_API_BASE_URL
+      - OPENAI_API_KEY
+    command: /bin/bash -c "inv dev"
     depends_on:
       - redis
       - local-do-files
@@ -34,23 +35,23 @@ services:
       - .:/usr/src/app
       - /opt/instance:/usr/src/app/instance
     environment:
-      - FLASK_APP=app.web
-      - FLASK_ENV=development
-      - SECRET_KEY=123
-      - SQLALCHEMY_DATABASE_URI=sqlite:///sqlite.db
-      - OPENAI_API_KEY=
-      - REDIS_URI=redis://redis:6379
-      - PINECONE_API_KEY=
-      - PINECONE_ENV_NAME=us-east-1
-      - PINECONE_INDEX_NAME=pdf-rag
-      - UPLOAD_URL=http://local-do-files:8050
-      - LANGFUSE_PUBLIC_KEY=
-      - LANGFUSE_SECRET_KEY=
-      - OPENAI_API_BASE_URL=
+      - FLASK_APP
+      - FLASK_ENV
+      - SECRET_KEY
+      - SQLALCHEMY_DATABASE_URI
+      - OPENAI_API_KEY
+      - REDIS_URI
+      - PINECONE_API_KEY
+      - PINECONE_ENV_NAME
+      - PINECONE_INDEX_NAME
+      - UPLOAD_URL
+      - LANGFUSE_PUBLIC_KEY
+      - LANGFUSE_SECRET_KEY
+      - OPENAI_EMBEDDING_BASE_URL
+      - OPENAI_EMBEDDING_KEY
     depends_on:
       - app
       - redis
-
 
   local-do-files:
     build:
@@ -68,24 +69,24 @@ services:
   init-db:
     build: .
     command: flask --app app.web init-db
-    environment:
-      - FLASK_APP=app.web
-      - FLASK_ENV=development
-      - SECRET_KEY=123
-      - SQLALCHEMY_DATABASE_URI=sqlite:///sqlite.db
-      - OPENAI_API_KEY=
-      - REDIS_URI=redis://redis:6379
-      - PINECONE_API_KEY=
-      - PINECONE_ENV_NAME=us-east-1
-      - PINECONE_INDEX_NAME=pdf-rag
-      - UPLOAD_URL=http://local-do-files:8050
-      - LANGFUSE_PUBLIC_KEY=
-      - LANGFUSE_SECRET_KEY=
-      - OPENAI_API_BASE_URL=
-    depends_on:
-      - redis
     profiles:
       - db-init
+    depends_on:
+      - redis
     volumes:
       - .:/usr/src/app
       - /opt/instance:/usr/src/app/instance
+    environment:
+      - FLASK_APP
+      - FLASK_ENV
+      - SECRET_KEY
+      - SQLALCHEMY_DATABASE_URI
+      - OPENAI_API_KEY
+      - REDIS_URI
+      - PINECONE_API_KEY
+      - PINECONE_ENV_NAME
+      - PINECONE_INDEX_NAME
+      - UPLOAD_URL
+      - LANGFUSE_PUBLIC_KEY
+      - LANGFUSE_SECRET_KEY
+      - OPENAI_API_BASE_URL
