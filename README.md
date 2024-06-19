@@ -13,6 +13,8 @@ This section describes how to use Docker Compose to set up and run the applicati
 ## First Time Setup
 
 1. **Build and Run the Application**:
+    
+    Rename the .env.example file to .env and fill in the necessary environment variables.
     Use Docker Compose to build and start all services defined in the `docker-compose.yml` file:
 
     first run to initialize the database
@@ -72,7 +74,6 @@ Ensure that all necessary environment variables are set up correctly in your `do
     - "FLASK_ENV",
     - "SECRET_KEY",
     - "SQLALCHEMY_DATABASE_URI",
-    - "OPENAI_API_KEY",
     - "REDIS_URI",
     - "PINECONE_API_KEY",
     - "PINECONE_ENV_NAME",
@@ -80,7 +81,10 @@ Ensure that all necessary environment variables are set up correctly in your `do
     - "UPLOAD_URL",
     - "LANGFUSE_PUBLIC_KEY",
     - "LANGFUSE_SECRET_KEY",
-    - "OPENAI_API_BASE_URL"
+    - "OPENAI_API_BASE_URL",
+    - "OPENAI_API_KEY",
+    - "OPENAI_EMBEDDING_BASE_URL",
+    - "OPENAI_EMBEDDING_KEY",
 
 
 

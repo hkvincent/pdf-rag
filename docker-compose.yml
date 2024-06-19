@@ -8,21 +8,6 @@ services:
     volumes:
       - .:/usr/src/app
       - /opt/instance:/usr/src/app/instance
-    environment:
-      - FLASK_APP
-      - FLASK_ENV
-      - SECRET_KEY
-      - SQLALCHEMY_DATABASE_URI
-      - OPENAI_API_KEY
-      - REDIS_URI
-      - PINECONE_API_KEY
-      - PINECONE_ENV_NAME
-      - PINECONE_INDEX_NAME
-      - UPLOAD_URL
-      - LANGFUSE_PUBLIC_KEY
-      - LANGFUSE_SECRET_KEY
-      - OPENAI_API_BASE_URL
-      - OPENAI_API_KEY
     command: /bin/bash -c "inv dev"
     depends_on:
       - redis
@@ -34,21 +19,6 @@ services:
     volumes:
       - .:/usr/src/app
       - /opt/instance:/usr/src/app/instance
-    environment:
-      - FLASK_APP
-      - FLASK_ENV
-      - SECRET_KEY
-      - SQLALCHEMY_DATABASE_URI
-      - OPENAI_API_KEY
-      - REDIS_URI
-      - PINECONE_API_KEY
-      - PINECONE_ENV_NAME
-      - PINECONE_INDEX_NAME
-      - UPLOAD_URL
-      - LANGFUSE_PUBLIC_KEY
-      - LANGFUSE_SECRET_KEY
-      - OPENAI_EMBEDDING_BASE_URL
-      - OPENAI_EMBEDDING_KEY
     depends_on:
       - app
       - redis
@@ -76,17 +46,3 @@ services:
     volumes:
       - .:/usr/src/app
       - /opt/instance:/usr/src/app/instance
-    environment:
-      - FLASK_APP
-      - FLASK_ENV
-      - SECRET_KEY
-      - SQLALCHEMY_DATABASE_URI
-      - OPENAI_API_KEY
-      - REDIS_URI
-      - PINECONE_API_KEY
-      - PINECONE_ENV_NAME
-      - PINECONE_INDEX_NAME
-      - UPLOAD_URL
-      - LANGFUSE_PUBLIC_KEY
-      - LANGFUSE_SECRET_KEY
-      - OPENAI_API_BASE_URL
