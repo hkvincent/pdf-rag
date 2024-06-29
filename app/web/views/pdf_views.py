@@ -1,9 +1,11 @@
-from flask import Blueprint, g, jsonify
+from flask import Blueprint, send_file, g, jsonify
+import requests
 from werkzeug.exceptions import Unauthorized
 from app.web.hooks import login_required, handle_file_upload, load_model
 from app.web.db.models import Pdf
 from app.web.tasks.embeddings import process_document
 from app.web import files
+from app.web.config import Config
 
 bp = Blueprint("pdf", __name__, url_prefix="/api/pdfs")
 
@@ -41,3 +43,20 @@ def show(pdf):
             "download_url": files.create_download_url(pdf.id),
         }
     )
+
+
+@bp.route("/download/<string:file_id>", methods=["GET"])
+@login_required
+def proxy_download(file_id):
+    download_url = f"{Config.UPLOAD_URL}/download/{file_id}"
+    response = requests.get(download_url, stream=True)
+
+    if response.status_code == 200:
+        return send_file(
+            response.raw,
+            as_attachment=False,
+            mimetype="application/pdf",
+            attachment_filename=file_id,
+        )
+    else:
+        return jsonify({"message": "File not found"}, 404)
