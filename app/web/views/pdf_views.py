@@ -49,7 +49,7 @@ def show(pdf):
 @login_required
 def proxy_download(file_id):
     download_url = f"{Config.UPLOAD_URL}/download/{file_id}"
-    response = requests.get(download_url, stream=True)
+    response = requests.get(download_url)
 
     if response.status_code == 200:
         return send_file(
