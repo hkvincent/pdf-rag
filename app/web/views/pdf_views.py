@@ -6,6 +6,7 @@ from app.web.db.models import Pdf
 from app.web.tasks.embeddings import process_document
 from app.web import files
 from app.web.config import Config
+from io import BytesIO
 
 bp = Blueprint("pdf", __name__, url_prefix="/api/pdfs")
 
@@ -52,8 +53,9 @@ def proxy_download(file_id):
     response = requests.get(download_url)
 
     if response.status_code == 200:
+        file_content = BytesIO(response.content)
         return send_file(
-            response.raw,
+            file_content,
             as_attachment=False,
             mimetype="application/pdf",
             download_name=file_id,
