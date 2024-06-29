@@ -56,7 +56,7 @@ def proxy_download(file_id):
             response.raw,
             as_attachment=False,
             mimetype="application/pdf",
-            attachment_filename=file_id,
+            download_name=file_id,
         )
     else:
         return jsonify({"message": "File not found"}, 404)
