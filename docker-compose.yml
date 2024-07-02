@@ -29,6 +29,8 @@ services:
       dockerfile: Dockerfile-upload
     ports:
       - "8050:8050"
+    volumes:
+      - /opt/uploads:/usr/src/app/uploads
     command: python app.py
 
   redis:
