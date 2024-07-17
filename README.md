@@ -1,6 +1,3 @@
-
-
-
 # Docker Setup [Recommend]
 
 This section describes how to use Docker Compose to set up and run the application. This method is recommended for development environments where Docker is preferred for managing application components.
@@ -69,7 +66,7 @@ You may want to run individual services manually for debugging or development pu
 
 Ensure that all necessary environment variables are set up correctly in your `docker-compose.yml`. For sensitive data, consider using Docker secrets or external environment files (`.env`).
 
-- here is the environment variables in the docker-compose file
+- here is the environment variables that the docker-compose file will read them from .env file
     - "FLASK_APP",
     - "FLASK_ENV",
     - "SECRET_KEY",
